@@ -1,12 +1,12 @@
 import React from "react";
 import Layout from "../Components/layout";
 
-function Home(){
+function Contact(){
     return(
         <Layout>
-            <h1>This is Hello Home Page</h1>
+            <h1>This is Contact Page</h1>
         </Layout>
     )
 }
 
-export default Home
+export default Contact
