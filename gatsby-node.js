@@ -1,3 +1,33 @@
+var path = require('path')
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
+
+  const results = await graphql(`{
+    allContentfulProduct {
+      nodes {
+        slug
+        title
+        desc {
+          raw
+        }
+      }
+    }
+  }`)
+
+  console.log(JSON.stringify(results))
+
+  results.data.allContentfulProduct.nodes.forEach((obj)=>{
+    createPage({
+      path: `/products/${obj.slug}`,
+      component: path.resolve("./src/templates/dynamic-page.tsx"),
+      context: {
+        itemDetails : obj
+      }
+    })
+  })
+}
+/*
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
 exports.onCreatePage = async ({ page, actions }) => {
@@ -13,7 +43,7 @@ exports.onCreatePage = async ({ page, actions }) => {
       createPage(page)
     }
   }
-
+*/
 /*
 exports.createPages = async function ({ actions}) {
 
